@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loneliness Intervention App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Welcome Page -->
+    <div id="welcome" class="section">
+      <h1>Welcome to the Loneliness Intervention App</h1>
+      <p>This app helps reduce loneliness by suggesting personalized social activities based on your inputs.</p>
+      <button id="startBtn" class="btn btn-primary">Start</button>
+    </div>
+
+    <!-- Calibration Page for Eye-Tracking -->
+    <div id="calibration" class="section" style="display:none;">
+      <h2>Eye-Tracking Calibration</h2>
+      <p>Please click on the points that appear on the screen to calibrate the eye-tracking system.</p>
+      <div id="calibrationPoints" style="position: relative; height: 300px; background: #eee;">
+        <!-- Calibration points will be added dynamically -->
+      </div>
+      <button id="calibrateBtn" class="btn btn-primary" disabled>Complete Calibration</button>
+    </div>
+
+    <!-- Assessment Page -->
+    <div id="assessment" class="section" style="display:none;">
+      <h2>Daily Assessment</h2>
+      <form id="assessmentForm">
+        <div class="form-group">
+          <label for="mood">How are you feeling today? <button type="button" class="speak-btn btn btn-secondary" onclick="speak('How are you feeling today?')">Speak</button></label>
+          <select id="mood" class="form-control" required>
+            <option value="">Select</option>
+            <option value="happy">Happy</option>
+            <option value="neutral">Neutral</option>
+            <option value="sad">Sad</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="interactions">How many social interactions did you have today? <button type="button" class="speak-btn btn btn-secondary" onclick="speak('How many social interactions did you have today?')">Speak</button></label>
+          <input type="number" id="interactions" class="form-control" min="0" required>
+        </div>
+        <div class="form-group">
+          <label for="journal">Tell us about your day (optional) <button type="button" class="speak-btn btn btn-secondary" onclick="speak('Tell us about your day')">Speak</button></label>
+          <textarea id="journal" class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Next</button>
+      </form>
+    </div>
+
+    <!-- DCE Page -->
+    <div id="dce" class="section" style="display:none;">
+      <h2>Your Preferences</h2>
+      <p>Please choose your preferred option for each question to help us tailor suggestions.</p>
+      <div id="questions">
+        <!-- Questions will be added dynamically -->
+      </div>
+      <button id="dceNext" class="btn btn-primary" style="display:none;">Next</button>
+    </div>
+
+    <!-- Engagement Page -->
+    <div id="engagement" class="section" style="display:none;">
+      <h2>Engagement Task</h2>
+      <p>Please look at the images below naturally for 30 seconds.</p>
+      <div id="images" class="d-flex flex-wrap justify-content-center">
+        <img src="https://via.placeholder.com/200x150?text=Group+In-Person" alt="Group In-Person" data-type="group-inperson">
+        <img src="https://via.placeholder.com/200x150?text=Group+Virtual" alt="Group Virtual" data-type="group-virtual">
+        <img src="https://via.placeholder.com/200x150?text=Individual+In-Person" alt="Individual In-Person" data-type="individual-inperson">
+        <img src="https://via.placeholder.com/200x150?text=Individual+Virtual" alt="Individual Virtual" data-type="individual-virtual">
+      </div>
+      <button id="engagementDone" class="btn btn-primary" style="display:none;">Done</button>
+    </div>
+
+    <!-- Results Page -->
+    <div id="results" class="section" style="display:none;">
+      <h2>Your Results</h2>
+      <p><strong>Loneliness Risk:</strong> <span id="riskLevel"></span></p>
+      <h3>Suggestions</h3>
+      <ul id="suggestionsList" class="list-group"></ul>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sentiment@5.0.0/lib/index.min.js"></script>
+  <script src="https://webgazer.cs.brown.edu/webgazer.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
